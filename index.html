@@ -441,12 +441,68 @@
     .d3 { transition-delay:0.30s; }
     .d4 { transition-delay:0.40s; }
 
+    /* ── HERO SPLIT LAYOUT ───────────────────────────── */
+    .hero__cols {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(2rem,5vw,5rem); align-items:center;
+    }
+    .hero__right {
+      position:relative; display:flex;
+      align-items:center; justify-content:center;
+    }
+    /* Spotlight SVG (aceternity/spotlight — CSS-adapted for plain HTML) */
+    .hero__spotlight {
+      position:absolute; top:-40%; right:-20%;
+      width:75%; height:140%; z-index:0; pointer-events:none;
+      opacity:0.55;
+    }
+    /* Scene container */
+    .hero__scene {
+      position:relative; width:100%; height:520px;
+      border-radius:var(--r-lg); overflow:hidden;
+    }
+    /* Indigo glow ring around the 3D scene */
+    .hero__scene::before {
+      content:''; position:absolute; inset:0; z-index:2;
+      border-radius:var(--r-lg); pointer-events:none;
+      box-shadow:
+        inset 0 0 0 1px rgba(79,70,229,0.35),
+        0 0 80px rgba(79,70,229,0.15),
+        0 0 160px rgba(79,70,229,0.07);
+    }
+    /* Ambient bloom behind the scene */
+    .hero__scene::after {
+      content:''; position:absolute; inset:-80px; z-index:-1; pointer-events:none;
+      background:radial-gradient(ellipse 75% 75% at 50% 50%, rgba(79,70,229,0.22) 0%, transparent 70%);
+    }
+    spline-viewer {
+      width:100%; height:100%; display:block;
+      background:transparent;
+    }
+    /* Loading skeleton while Spline initialises */
+    .hero__scene-loader {
+      position:absolute; inset:0; z-index:3;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(7,11,24,0.6); border-radius:var(--r-lg);
+      transition:opacity 0.6s ease;
+    }
+    .hero__scene-loader.hidden { opacity:0; pointer-events:none; }
+    .loader-ring {
+      width:36px; height:36px; border-radius:50%;
+      border:2px solid rgba(79,70,229,0.2);
+      border-top-color:rgba(79,70,229,0.85);
+      animation:spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width:1024px) {
       .services__grid   { grid-template-columns:repeat(2,1fr); }
       .ventures__grid   { grid-template-columns:repeat(2,1fr); }
       .about__inner     { grid-template-columns:1fr; }
       .services__head   { flex-direction:column; align-items:flex-start; }
+      .hero__cols       { grid-template-columns:1fr; }
+      .hero__right      { display:none; }
     }
     @media (max-width:768px) {
       .nav__links       { display:none; }
@@ -461,6 +517,8 @@
       .footer__cols     { flex-direction:column; gap:2rem; }
     }
   </style>
+  <!-- Spline 3D viewer web component (no build tools required) -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 </head>
 <body>
 
@@ -492,25 +550,64 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero__body">
-    <div class="hero__eyebrow">Available for advisory &amp; consulting engagements</div>
-    <h1 class="hero__h1">The strategist<br>who <em>also ships.</em></h1>
-    <p class="hero__sub">
-      Cornell MBA. Purdue engineer. Three decades at P&amp;G, Intuit, and energy markets —
-      now building AI-powered ventures and advising organizations on transformation.
-    </p>
-    <div class="hero__actions">
-      <a href="#contact" class="btn btn-white">Work with me</a>
-      <a href="#ventures" class="btn btn-ghost">View ventures &rarr;</a>
-    </div>
-    <div class="hero__trust">
-      <p class="hero__trust-label">Career pedigree</p>
-      <div class="hero__trust-logos">
-        <span class="trust-badge">Procter &amp; Gamble</span>
-        <span class="trust-badge">Intuit</span>
-        <span class="trust-badge">Cornell Business</span>
-        <span class="trust-badge">Purdue Engineering</span>
-        <span class="trust-badge">Sam Houston State</span>
+    <div class="hero__cols">
+
+      <!-- Left: content -->
+      <div class="hero__left">
+        <div class="hero__eyebrow">Available for advisory &amp; consulting engagements</div>
+        <h1 class="hero__h1">The strategist<br>who <em>also ships.</em></h1>
+        <p class="hero__sub">
+          Cornell MBA. Purdue engineer. Three decades at P&amp;G, Intuit, and energy markets —
+          now building AI-powered ventures and advising organizations on transformation.
+        </p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn-white">Work with me</a>
+          <a href="#ventures" class="btn btn-ghost">View ventures &rarr;</a>
+        </div>
+        <div class="hero__trust">
+          <p class="hero__trust-label">Career pedigree</p>
+          <div class="hero__trust-logos">
+            <span class="trust-badge">Procter &amp; Gamble</span>
+            <span class="trust-badge">Intuit</span>
+            <span class="trust-badge">Cornell Business</span>
+            <span class="trust-badge">Purdue Engineering</span>
+            <span class="trust-badge">Sam Houston State</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Right: 3D Spline scene -->
+      <div class="hero__right">
+        <!-- Aceternity spotlight beam (SVG, CSS-adapted) -->
+        <svg class="hero__spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none" aria-hidden="true">
+          <g filter="url(#hero-spot)">
+            <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+              transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+              fill="white" fill-opacity="0.09"/>
+          </g>
+          <defs>
+            <filter id="hero-spot" x="0.86" y="0.84" width="3785.16" height="2840.26"
+              filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+              <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur"/>
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="hero__scene">
+          <!-- Loading ring — hidden once spline fires its load event -->
+          <div class="hero__scene-loader" id="spline-loader">
+            <div class="loader-ring"></div>
+          </div>
+          <spline-viewer
+            url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            loading-anim-type="none"
+            id="spline-scene">
+          </spline-viewer>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -789,6 +886,15 @@
 </footer>
 
 <script>
+  // Hide Spline loader once scene is ready
+  const splineEl = document.getElementById('spline-scene');
+  const splineLoader = document.getElementById('spline-loader');
+  if (splineEl && splineLoader) {
+    splineEl.addEventListener('load', () => splineLoader.classList.add('hidden'));
+    // Fallback: hide after 8s regardless
+    setTimeout(() => splineLoader.classList.add('hidden'), 8000);
+  }
+
   // Nav scroll state
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
