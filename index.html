@@ -1,1053 +1,826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vajih Khan | Innovation & Technology Consulting</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0A0E27;
-            --accent: #FF6B35;
-            --accent-2: #004E89;
-            --text-light: #E8E8E8;
-            --text-dark: #1A1A1A;
-            --bg-light: #F8F7F4;
-            --gradient-1: linear-gradient(135deg, #0A0E27 0%, #1A237E 100%);
-            --gradient-2: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
-            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
-            --shadow-hard: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            color: var(--text-dark);
-            background: var(--bg-light);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            animation: slideDown 0.6s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        nav .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--gradient-1);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-50px, 50px) rotate(5deg); }
-        }
-
-        .hero .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-tag {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            background: rgba(255, 107, 53, 0.2);
-            color: var(--accent);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            letter-spacing: 0.5px;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: var(--text-light);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
-        }
-
-        .hero-subtitle {
-            font-size: 1.4rem;
-            color: rgba(232, 232, 232, 0.85);
-            margin-bottom: 3rem;
-            line-height: 1.7;
-            animation: fadeInUp 1s ease-out 0.6s backwards;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            animation: fadeInUp 1s ease-out 0.8s backwards;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--gradient-2);
-            color: white;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-light);
-            border: 2px solid rgba(232, 232, 232, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(232, 232, 232, 0.6);
-        }
-
-        /* Stats Section */
-        .stats {
-            background: white;
-            padding: 5rem 5%;
-            margin-top: -5rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        .stats .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            animation: fadeInUp 1s ease-out backwards;
-        }
-
-        .stat-item:nth-child(1) { animation-delay: 0.1s; }
-        .stat-item:nth-child(2) { animation-delay: 0.2s; }
-        .stat-item:nth-child(3) { animation-delay: 0.3s; }
-        .stat-item:nth-child(4) { animation-delay: 0.4s; }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            opacity: 0.7;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 8rem 5%;
-            background: var(--bg-light);
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 5rem;
-        }
-
-        .section-tag {
-            font-size: 0.9rem;
-            color: var(--accent);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-        }
-
-        .section-description {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            opacity: 0.7;
-            line-height: 1.8;
-        }
-
-        .services-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-2);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hard);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: var(--text-dark);
-            opacity: 0.7;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .service-list li {
-            padding: 0.5rem 0;
-            color: var(--text-dark);
-            opacity: 0.8;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .service-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 8rem 5%;
-            background: var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .projects::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            left: -10%;
-            width: 60%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-        }
-
-        .projects .section-header {
-            position: relative;
-            z-index: 2;
-        }
-
-        .projects .section-tag {
-            color: var(--accent);
-        }
-
-        .projects h2 {
-            color: var(--text-light);
-        }
-
-        .projects .section-description {
-            color: var(--text-light);
-            opacity: 0.8;
-        }
-
-        .project-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 2.5rem;
-            border-radius: 16px;
-            transition: all 0.4s ease;
-        }
-
-        .project-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(255, 107, 53, 0.2);
-            color: var(--accent);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: var(--text-light);
-            opacity: 0.8;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-tag {
-            padding: 0.3rem 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-light);
-            border-radius: 15px;
-            font-size: 0.85rem;
-        }
-
-        /* Credentials Section */
-        .credentials {
-            padding: 8rem 5%;
-            background: white;
-        }
-
-        .credentials-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .credential-block h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .credential-block h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--gradient-2);
-        }
-
-        .credential-item {
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .credential-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .credential-title {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .credential-org {
-            color: var(--text-dark);
-            opacity: 0.7;
-            font-size: 0.95rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 8rem 5%;
-            background: var(--gradient-1);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-section h2 {
-            color: var(--text-light);
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-section p {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            opacity: 0.85;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            padding: 4rem 5% 2rem;
-            color: var(--text-light);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-about h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-        }
-
-        .footer-about p {
-            opacity: 0.7;
-            line-height: 1.7;
-        }
-
-        .footer-links h5 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            opacity: 0.6;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.5rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .project-grid { grid-template-columns: 1fr; }
-            .credentials-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            .nav-links { display: none; }
-            .hero { min-height: 70vh; }
-            .cta-group { flex-direction: column; }
-            .stats .container { gap: 2rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vajih Khan — AI Strategy, Product & Technology Consulting</title>
+  <meta name="description" content="Cornell MBA. Purdue engineer. 30+ years at P&G and Intuit. Now building AI ventures and advising leaders on transformation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────── */
+    :root {
+      --bg:            #F8F7F4;
+      --bg-subtle:     #F0EEE9;
+      --surface:       #FFFFFF;
+      --ink:           #0D1117;
+      --ink-2:         #1E2433;
+      --ink-muted:     #64748B;
+      --ink-faint:     #94A3B8;
+      --accent:        #4F46E5;
+      --accent-hover:  #4338CA;
+      --accent-soft:   #EEF2FF;
+      --warm:          #C2540A;
+      --dark:          #070B18;
+      --dark-border:   rgba(255,255,255,0.09);
+      --dark-muted:    rgba(255,255,255,0.55);
+      --border:        rgba(0,0,0,0.07);
+      --border-mid:    rgba(0,0,0,0.11);
+      --shadow-sm:     0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md:     0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg:     0 16px 48px rgba(0,0,0,0.10);
+      --r-sm:          8px;
+      --r-md:          12px;
+      --r-lg:          20px;
+      --r-pill:        9999px;
+      --font-body:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display:  'Instrument Serif', Georgia, serif;
+      --max-w:         1280px;
+      --py:            clamp(5rem, 8vw, 8rem);
+      --px:            clamp(1.5rem, 5%, 5rem);
+    }
+
+    /* ── RESET ───────────────────────────────────────── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+    body { font-family:var(--font-body); font-size:1rem; line-height:1.6; color:var(--ink); background:var(--bg); overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    ul { list-style:none; }
+    img { display:block; max-width:100%; }
+    .container { max-width:var(--max-w); margin:0 auto; padding:0 var(--px); }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      height:68px; padding:0 var(--px);
+      display:flex; align-items:center;
+      transition:background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .nav.scrolled {
+      background:rgba(255,255,255,0.93);
+      backdrop-filter:blur(14px);
+      box-shadow:0 1px 0 var(--border);
+    }
+    .nav__inner {
+      width:100%; max-width:var(--max-w); margin:0 auto;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav__logo {
+      font-family:var(--font-display);
+      font-size:1.4rem; color:white;
+      transition:color 0.3s;
+    }
+    .nav.scrolled .nav__logo { color:var(--ink); }
+
+    .nav__links {
+      display:flex; align-items:center; gap:2.5rem;
+    }
+    .nav__links a {
+      font-size:0.875rem; font-weight:500;
+      color:rgba(255,255,255,0.75);
+      transition:color 0.2s;
+    }
+    .nav__links a:hover { color:white; }
+    .nav.scrolled .nav__links a { color:var(--ink-muted); }
+    .nav.scrolled .nav__links a:hover { color:var(--ink); }
+
+    .nav__cta {
+      padding:0.5rem 1.2rem;
+      font-size:0.85rem; font-weight:600;
+      border-radius:var(--r-pill);
+      background:rgba(255,255,255,0.12) !important;
+      color:white !important;
+      border:1px solid rgba(255,255,255,0.22);
+      transition:all 0.2s;
+    }
+    .nav__cta:hover { background:rgba(255,255,255,0.22) !important; }
+    .nav.scrolled .nav__cta {
+      background:var(--accent) !important;
+      border-color:var(--accent) !important;
+      color:white !important;
+    }
+    .nav.scrolled .nav__cta:hover { background:var(--accent-hover) !important; }
+
+    /* hamburger */
+    .nav__burger {
+      display:none; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:4px;
+    }
+    .nav__burger span {
+      display:block; width:24px; height:2px;
+      background:white; border-radius:2px; transition:all 0.3s;
+    }
+    .nav.scrolled .nav__burger span { background:var(--ink); }
+
+    /* mobile overlay */
+    .nav__mobile {
+      display:none; position:fixed; inset:0; z-index:99;
+      background:rgba(7,11,24,0.97); backdrop-filter:blur(20px);
+      flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
+    }
+    .nav__mobile.open { display:flex; }
+    .nav__mobile a {
+      font-family:var(--font-display); font-style:italic;
+      font-size:2.25rem; color:white; transition:opacity 0.2s;
+    }
+    .nav__mobile a:hover { opacity:0.65; }
+    .nav__mobile-close {
+      position:absolute; top:1.5rem; right:2rem;
+      font-size:1.75rem; color:white; background:none; border:none; cursor:pointer;
+    }
+
+    /* ── BUTTONS ─────────────────────────────────────── */
+    .btn {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      padding:0.75rem 1.75rem;
+      font-family:var(--font-body); font-size:0.9rem; font-weight:600;
+      border-radius:var(--r-pill); border:none; cursor:pointer;
+      transition:all 0.2s; text-decoration:none;
+    }
+    .btn-white  { background:white; color:var(--ink); }
+    .btn-white:hover { background:rgba(255,255,255,0.88); transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,0,0,0.18); }
+    .btn-ghost  { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.85); border:1px solid rgba(255,255,255,0.16); }
+    .btn-ghost:hover { background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.28); }
+    .btn-accent { background:var(--accent); color:white; }
+    .btn-accent:hover { background:var(--accent-hover); transform:translateY(-1px); box-shadow:0 8px 24px rgba(79,70,229,0.28); }
+    .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--border-mid); }
+    .btn-outline:hover { border-color:var(--ink); transform:translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height:100vh; display:flex; align-items:center;
+      background:var(--dark); position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 30%, rgba(79,70,229,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 55% at 85% 70%, rgba(194,84,10,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 65% 15%, rgba(79,70,229,0.09) 0%, transparent 55%);
+    }
+    .hero__body {
+      position:relative; z-index:2; width:100%;
+      max-width:var(--max-w); margin:0 auto;
+      padding:clamp(7rem,14vh,10rem) var(--px) clamp(5rem,10vh,8rem);
+    }
+    .hero__eyebrow {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      padding:0.4rem 1rem; margin-bottom:2.5rem;
+      border:1px solid rgba(255,255,255,0.14); border-radius:var(--r-pill);
+      font-size:0.78rem; font-weight:500; letter-spacing:0.05em;
+      text-transform:uppercase; color:rgba(255,255,255,0.6);
+      animation:fadeUp 0.8s ease-out backwards;
+    }
+    .hero__eyebrow::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:#4ade80; box-shadow:0 0 8px #4ade80;
+    }
+    .hero__h1 {
+      font-family:var(--font-display);
+      font-size:clamp(3rem, 5.5vw, 5.25rem);
+      font-weight:400; line-height:1.08; letter-spacing:-0.025em;
+      color:white; max-width:780px; margin-bottom:2rem;
+      animation:fadeUp 0.8s ease-out 0.15s backwards;
+    }
+    .hero__h1 em { font-style:italic; color:rgba(255,255,255,0.55); }
+    .hero__sub {
+      font-size:clamp(1rem,1.4vw,1.15rem); line-height:1.8;
+      color:rgba(255,255,255,0.55); max-width:560px; margin-bottom:3rem;
+      animation:fadeUp 0.8s ease-out 0.3s backwards;
+    }
+    .hero__actions {
+      display:flex; gap:1rem; flex-wrap:wrap;
+      animation:fadeUp 0.8s ease-out 0.45s backwards;
+    }
+    .hero__trust {
+      margin-top:4.5rem; padding-top:3rem;
+      border-top:1px solid rgba(255,255,255,0.07);
+      animation:fadeUp 0.8s ease-out 0.6s backwards;
+    }
+    .hero__trust-label {
+      font-size:0.72rem; font-weight:500; letter-spacing:0.09em;
+      text-transform:uppercase; color:rgba(255,255,255,0.3);
+      margin-bottom:1.5rem;
+    }
+    .hero__trust-logos { display:flex; flex-wrap:wrap; gap:2.5rem; align-items:center; }
+    .trust-badge {
+      font-family:var(--font-display); font-size:1.05rem;
+      color:rgba(255,255,255,0.38); transition:color 0.2s;
+    }
+    .trust-badge:hover { color:rgba(255,255,255,0.7); }
+
+    /* ── SECTION SHARED ──────────────────────────────── */
+    .section-label {
+      display:inline-block; font-size:0.73rem; font-weight:600;
+      letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:1.1rem;
+    }
+    .section-h2 {
+      font-family:var(--font-display);
+      font-size:clamp(2rem,3.8vw,2.9rem);
+      font-weight:400; line-height:1.15; letter-spacing:-0.02em;
+      color:var(--ink); margin-bottom:1.2rem;
+    }
+    .section-h2 em { font-style:italic; color:var(--ink-muted); }
+    .section-p {
+      font-size:1.05rem; color:var(--ink-muted);
+      line-height:1.8; max-width:500px;
+    }
+
+    /* ── SERVICES ────────────────────────────────────── */
+    .services { padding:var(--py) 0; background:var(--bg); }
+    .services__head {
+      max-width:var(--max-w); margin:0 auto clamp(3rem,5vw,5rem);
+      padding:0 var(--px);
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:2rem; flex-wrap:wrap;
+    }
+    .services__grid {
+      max-width:var(--max-w); margin:0 auto; padding:0 var(--px);
+      display:grid; grid-template-columns:repeat(3,1fr);
+      background:var(--border); gap:1px;
+      border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden;
+    }
+    .svc {
+      background:var(--surface); padding:2.25rem 2.25rem 2rem;
+      transition:background 0.25s;
+    }
+    .svc:hover { background:var(--bg); }
+    .svc__icon {
+      width:40px; height:40px; margin-bottom:1.6rem;
+      color:var(--accent); flex-shrink:0;
+    }
+    .svc__title {
+      font-family:var(--font-display); font-size:1.3rem;
+      font-weight:400; letter-spacing:-0.02em;
+      color:var(--ink); margin-bottom:0.65rem; line-height:1.3;
+    }
+    .svc__body { font-size:0.875rem; color:var(--ink-muted); line-height:1.75; }
+    .svc__tags { margin-top:1.4rem; display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .tag {
+      padding:0.22rem 0.65rem;
+      background:var(--bg-subtle); color:var(--ink-muted);
+      font-size:0.73rem; font-weight:500; border-radius:var(--r-pill);
+    }
+
+    /* ── VENTURES ────────────────────────────────────── */
+    .ventures {
+      padding:var(--py) 0; background:var(--dark);
+      position:relative; overflow:hidden;
+    }
+    .ventures::before {
+      content:''; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 50% 60% at 90% 15%, rgba(79,70,229,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 8%  85%, rgba(194,84,10,0.08) 0%, transparent 55%);
+    }
+    .ventures__head {
+      max-width:var(--max-w); margin:0 auto clamp(3rem,5vw,5rem);
+      padding:0 var(--px); position:relative; z-index:2;
+    }
+    .ventures__head .section-label { color:rgba(255,255,255,0.4); }
+    .ventures__head .section-h2    { color:white; }
+    .ventures__head .section-p     { color:var(--dark-muted); }
+
+    .ventures__grid {
+      max-width:var(--max-w); margin:0 auto; padding:0 var(--px);
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.25rem; position:relative; z-index:2;
+    }
+    .vc {
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:var(--r-lg); padding:2rem;
+      transition:all 0.3s;
+    }
+    .vc:hover {
+      background:rgba(255,255,255,0.07);
+      border-color:rgba(255,255,255,0.15);
+      transform:translateY(-4px);
+    }
+    .vc__cat {
+      display:inline-block; padding:0.28rem 0.8rem; margin-bottom:1.4rem;
+      background:rgba(79,70,229,0.18); color:rgba(167,162,255,0.95);
+      font-size:0.73rem; font-weight:600; letter-spacing:0.03em;
+      border-radius:var(--r-pill);
+    }
+    .vc__title {
+      font-family:var(--font-display); font-size:1.5rem;
+      font-weight:400; color:white; line-height:1.2;
+      letter-spacing:-0.02em; margin-bottom:0.85rem;
+    }
+    .vc__body {
+      font-size:0.875rem; color:rgba(255,255,255,0.5);
+      line-height:1.75; margin-bottom:1.6rem;
+    }
+    .vc__stack { display:flex; flex-wrap:wrap; gap:0.35rem; }
+    .stag {
+      padding:0.22rem 0.65rem;
+      background:rgba(255,255,255,0.07);
+      border:1px solid rgba(255,255,255,0.1);
+      color:rgba(255,255,255,0.5);
+      font-size:0.73rem; border-radius:var(--r-pill);
+    }
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    .about { padding:var(--py) 0; background:var(--surface); }
+    .about__inner {
+      max-width:var(--max-w); margin:0 auto; padding:0 var(--px);
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:clamp(3rem,6vw,7rem); align-items:start;
+    }
+    .about__statement {
+      font-family:var(--font-display);
+      font-size:clamp(1.4rem,2.2vw,1.85rem);
+      font-weight:400; line-height:1.5; letter-spacing:-0.01em;
+      color:var(--ink); margin-bottom:1.75rem;
+    }
+    .about__statement em { font-style:italic; color:var(--ink-muted); }
+    .about__body {
+      font-size:0.975rem; color:var(--ink-muted);
+      line-height:1.85; margin-bottom:1.25rem;
+    }
+    .about__meta {
+      margin-top:2rem; display:flex; flex-direction:column; gap:0.7rem;
+    }
+    .meta-row { display:flex; align-items:baseline; gap:1rem; font-size:0.875rem; }
+    .meta-row__label { font-weight:600; color:var(--ink); min-width:100px; }
+    .meta-row__val   { color:var(--ink-muted); }
+
+    .cred-cards { display:flex; flex-direction:column; gap:1.25rem; }
+    .cred {
+      padding:1.6rem 1.75rem;
+      border:1px solid var(--border); border-radius:var(--r-md);
+      transition:box-shadow 0.25s;
+    }
+    .cred:hover { box-shadow:var(--shadow-md); }
+    .cred__org {
+      font-size:0.7rem; font-weight:600; letter-spacing:0.07em;
+      text-transform:uppercase; color:var(--ink-faint); margin-bottom:0.4rem;
+    }
+    .cred__role {
+      font-family:var(--font-display); font-size:1.15rem;
+      font-weight:400; color:var(--ink); margin-bottom:0.25rem;
+    }
+    .cred__detail { font-size:0.84rem; color:var(--ink-muted); }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    .contact {
+      padding:var(--py) 0; background:var(--dark);
+      position:relative; overflow:hidden;
+    }
+    .contact::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 70% 70% at 50% 50%, rgba(79,70,229,0.18) 0%, transparent 65%);
+    }
+    .contact__inner {
+      position:relative; z-index:2;
+      max-width:640px; margin:0 auto; padding:0 var(--px);
+      text-align:center;
+    }
+    .contact__h2 {
+      font-family:var(--font-display);
+      font-size:clamp(2.25rem,4.5vw,3.75rem);
+      font-weight:400; line-height:1.1; letter-spacing:-0.025em;
+      color:white; margin-bottom:1.4rem;
+    }
+    .contact__h2 em { font-style:italic; color:rgba(255,255,255,0.45); }
+    .contact__sub {
+      font-size:1.05rem; color:rgba(255,255,255,0.5);
+      line-height:1.8; margin-bottom:2.5rem;
+    }
+    .contact__actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background:#060810;
+      padding:3.5rem 0 2rem;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+    .footer__inner {
+      max-width:var(--max-w); margin:0 auto; padding:0 var(--px);
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:3rem; flex-wrap:wrap; margin-bottom:3rem;
+    }
+    .footer__brand { max-width:280px; }
+    .footer__logo {
+      font-family:var(--font-display); font-size:1.4rem;
+      color:white; margin-bottom:0.7rem;
+    }
+    .footer__tagline { font-size:0.84rem; color:rgba(255,255,255,0.35); line-height:1.7; }
+    .footer__cols { display:flex; gap:4rem; flex-wrap:wrap; }
+    .footer__col h6 {
+      font-size:0.7rem; font-weight:600; letter-spacing:0.09em;
+      text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:1.25rem;
+    }
+    .footer__col ul { display:flex; flex-direction:column; gap:0.65rem; }
+    .footer__col a  { font-size:0.84rem; color:rgba(255,255,255,0.5); transition:color 0.2s; }
+    .footer__col a:hover { color:white; }
+    .footer__bottom {
+      max-width:var(--max-w); margin:0 auto;
+      padding:1.5rem var(--px) 0;
+      border-top:1px solid rgba(255,255,255,0.05);
+      display:flex; justify-content:space-between; align-items:center;
+      flex-wrap:wrap; gap:1rem;
+    }
+    .footer__copy { font-size:0.78rem; color:rgba(255,255,255,0.25); }
+
+    /* ── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .reveal {
+      opacity:0; transform:translateY(22px);
+      transition:opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.in { opacity:1; transform:translateY(0); }
+    .d1 { transition-delay:0.10s; }
+    .d2 { transition-delay:0.20s; }
+    .d3 { transition-delay:0.30s; }
+    .d4 { transition-delay:0.40s; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width:1024px) {
+      .services__grid   { grid-template-columns:repeat(2,1fr); }
+      .ventures__grid   { grid-template-columns:repeat(2,1fr); }
+      .about__inner     { grid-template-columns:1fr; }
+      .services__head   { flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width:768px) {
+      .nav__links       { display:none; }
+      .nav__burger      { display:flex; }
+      .services__grid   { grid-template-columns:1fr; }
+      .ventures__grid   { grid-template-columns:1fr; }
+      .hero__trust-logos{ gap:1.5rem; }
+    }
+    @media (max-width:480px) {
+      .hero__actions    { flex-direction:column; }
+      .footer__inner    { flex-direction:column; }
+      .footer__cols     { flex-direction:column; gap:2rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">VK</div>
-            <ul class="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#credentials">Credentials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo">Vajih Khan</a>
+    <ul class="nav__links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#ventures">Ventures</a></li>
+      <li><a href="#about">Background</a></li>
+      <li><a href="#contact" class="nav__cta">Work with me</a></li>
+    </ul>
+    <button class="nav__burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav__mobile" id="mob">
+  <button class="nav__mobile-close" id="mob-close" aria-label="Close">&#x2715;</button>
+  <a href="#services"  class="mob-link">Services</a>
+  <a href="#ventures"  class="mob-link">Ventures</a>
+  <a href="#about"     class="mob-link">Background</a>
+  <a href="#contact"   class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__body">
+    <div class="hero__eyebrow">Available for advisory &amp; consulting engagements</div>
+    <h1 class="hero__h1">The strategist<br>who <em>also ships.</em></h1>
+    <p class="hero__sub">
+      Cornell MBA. Purdue engineer. Three decades at P&amp;G, Intuit, and energy markets —
+      now building AI-powered ventures and advising organizations on transformation.
+    </p>
+    <div class="hero__actions">
+      <a href="#contact" class="btn btn-white">Work with me</a>
+      <a href="#ventures" class="btn btn-ghost">View ventures &rarr;</a>
+    </div>
+    <div class="hero__trust">
+      <p class="hero__trust-label">Career pedigree</p>
+      <div class="hero__trust-logos">
+        <span class="trust-badge">Procter &amp; Gamble</span>
+        <span class="trust-badge">Intuit</span>
+        <span class="trust-badge">Cornell Business</span>
+        <span class="trust-badge">Purdue Engineering</span>
+        <span class="trust-badge">Sam Houston State</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="services__head">
+    <div>
+      <div class="section-label">Services</div>
+      <h2 class="section-h2">Where I create<br><em>the most leverage</em></h2>
+    </div>
+    <p class="section-p">
+      I work with founders and leadership teams who need someone operating at the intersection
+      of strategy, technology, and hands-on execution.
+    </p>
+  </div>
+  <div class="services__grid">
+
+    <div class="svc reveal">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+      </svg>
+      <h3 class="svc__title">AI Strategy &amp; Implementation</h3>
+      <p class="svc__body">From identifying the right AI use cases to building agentic systems in production — bridging strategy and delivery.</p>
+      <div class="svc__tags">
+        <span class="tag">Agentic AI</span><span class="tag">Voice AI</span>
+        <span class="tag">LLM Integration</span><span class="tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="svc reveal d1">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+      </svg>
+      <h3 class="svc__title">Product Development</h3>
+      <p class="svc__body">Rapid concept-to-market with Agile methodologies, design thinking, and a bias for shipping over planning.</p>
+      <div class="svc__tags">
+        <span class="tag">Product Strategy</span><span class="tag">Agile</span>
+        <span class="tag">Design Thinking</span><span class="tag">GTM</span>
+      </div>
+    </div>
+
+    <div class="svc reveal d2">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3"/>
+      </svg>
+      <h3 class="svc__title">SaaS &amp; Platform Architecture</h3>
+      <p class="svc__body">Multi-tenant platforms built to scale. Full-stack development using modern tooling — Next.js, Supabase, cloud-native.</p>
+      <div class="svc__tags">
+        <span class="tag">Next.js</span><span class="tag">Multi-tenant SaaS</span>
+        <span class="tag">API Architecture</span>
+      </div>
+    </div>
+
+    <div class="svc reveal d1">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+      </svg>
+      <h3 class="svc__title">Healthcare Technology</h3>
+      <p class="svc__body">AI receptionists and HIPAA-compliant practice management for dental and healthcare organizations.</p>
+      <div class="svc__tags">
+        <span class="tag">AI Receptionist</span><span class="tag">EHR Integration</span>
+        <span class="tag">HIPAA</span>
+      </div>
+    </div>
+
+    <div class="svc reveal d2">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+      </svg>
+      <h3 class="svc__title">EdTech &amp; Academic Programs</h3>
+      <p class="svc__body">Curriculum design at the intersection of AI, Agile, and innovation — for universities and corporate teams.</p>
+      <div class="svc__tags">
+        <span class="tag">AI / Robotics Curriculum</span>
+        <span class="tag">Corporate Training</span>
+      </div>
+    </div>
+
+    <div class="svc reveal d3">
+      <svg class="svc__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+      </svg>
+      <h3 class="svc__title">Strategic Advisory</h3>
+      <p class="svc__body">Executive-level guidance on technology roadmaps, digital transformation, and innovation portfolio strategy.</p>
+      <div class="svc__tags">
+        <span class="tag">Tech Roadmaps</span><span class="tag">Transformation</span>
+        <span class="tag">Due Diligence</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VENTURES -->
+<section id="ventures" class="ventures">
+  <div class="ventures__head reveal">
+    <div class="section-label">Active Ventures</div>
+    <h2 class="section-h2">Building at <em>the frontier</em></h2>
+    <p class="section-p">Not just advising — actively building. These are running, shipping ventures.</p>
+  </div>
+  <div class="ventures__grid">
+
+    <div class="vc reveal">
+      <span class="vc__cat">Healthcare SaaS</span>
+      <h3 class="vc__title">DentalConnect Pro</h3>
+      <p class="vc__body">Multi-tenant practice management for dental groups. Voice AI front desk, Eaglesoft integration, and automated scheduling workflows.</p>
+      <div class="vc__stack">
+        <span class="stag">Vapi</span><span class="stag">Twilio</span>
+        <span class="stag">Next.js</span><span class="stag">Supabase</span>
+      </div>
+    </div>
+
+    <div class="vc reveal d1">
+      <span class="vc__cat">AI Tools</span>
+      <h3 class="vc__title">TaxClaw / SaveRx.ai</h3>
+      <p class="vc__body">AI-powered tax preparation with maximum refund optimization. Production-deployed with CPA-verified accuracy.</p>
+      <div class="vc__stack">
+        <span class="stag">Claude API</span><span class="stag">Docker</span><span class="stag">VPS</span>
+      </div>
+    </div>
+
+    <div class="vc reveal d2">
+      <span class="vc__cat">Real Estate</span>
+      <h3 class="vc__title">HarvestBond</h3>
+      <p class="vc__body">Agricultural real estate investment platform connecting investors with farm land opportunities. Active through Sterling Ridge Magnolia LLC.</p>
+      <div class="vc__stack">
+        <span class="stag">PropTech</span><span class="stag">Investment Management</span>
+      </div>
+    </div>
+
+    <div class="vc reveal d1">
+      <span class="vc__cat">Mobile App</span>
+      <h3 class="vc__title">Zikr Circles</h3>
+      <p class="vc__body">Mobile-first platform for guided Islamic group remembrance with WhatsApp integration for community coordination.</p>
+      <div class="vc__stack">
+        <span class="stag">Next.js</span><span class="stag">Supabase</span><span class="stag">WhatsApp API</span>
+      </div>
+    </div>
+
+    <div class="vc reveal d2">
+      <span class="vc__cat">Developer Tools</span>
+      <h3 class="vc__title">SmartMeter</h3>
+      <p class="vc__body">AI cost optimization dashboard with live monitoring of API usage and spend across multiple AI providers. Published as an npm package.</p>
+      <div class="vc__stack">
+        <span class="stag">npm Package</span><span class="stag">Web Dashboard</span>
+      </div>
+    </div>
+
+    <div class="vc reveal d3">
+      <span class="vc__cat">Academic</span>
+      <h3 class="vc__title">The Agile Innovator</h3>
+      <p class="vc__body">A 15-principle framework integrating Agile and design thinking — textbook at Sam Houston State and corporate workshop curriculum.</p>
+      <div class="vc__stack">
+        <span class="stag">Curriculum Design</span><span class="stag">Innovation Framework</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="about__inner">
+    <div class="reveal">
+      <div class="section-label">Background</div>
+      <p class="about__statement">
+        The rare combination of <em>Fortune 500 strategic depth</em>
+        and the ability to sit down and build production software.
+      </p>
+      <p class="about__body">
+        Starting as a chemical engineer at Purdue, then through Cornell's MBA program,
+        I spent three decades in product innovation and technology leadership at P&amp;G and Intuit
+        before turning full-time to entrepreneurship and AI development.
+      </p>
+      <p class="about__body">
+        Today I teach AI, robotics, and Agile innovation at Sam Houston State University
+        while actively building multiple ventures. That combination — executive strategic
+        thinking, hands-on engineering, and founder experience — means I help you move faster,
+        with less risk, and more conviction.
+      </p>
+      <div class="about__meta">
+        <div class="meta-row">
+          <span class="meta-row__label">Education</span>
+          <span class="meta-row__val">Cornell MBA &middot; Purdue ChemE</span>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-tag">Innovation & Technology Consulting</span>
-                <h1>Transforming Vision Into Velocity</h1>
-                <p class="hero-subtitle">30+ years architecting innovation across Consumer Goods, Technology, and Energy. Specializing in AI-powered transformation, product development, and SaaS platforms that deliver measurable impact.</p>
-                <div class="cta-group">
-                    <a href="#contact" class="btn btn-primary">Start a Conversation</a>
-                    <a href="#services" class="btn btn-secondary">Explore Services</a>
-                </div>
-            </div>
+        <div class="meta-row">
+          <span class="meta-row__label">Enterprise</span>
+          <span class="meta-row__val">P&amp;G &middot; Intuit &middot; Energy</span>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stat-item">
-                <div class="stat-number">30+</div>
-                <div class="stat-label">Years of Experience</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Active Ventures</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Industries Mastered</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">∞</div>
-                <div class="stat-label">Solutions Delivered</div>
-            </div>
+        <div class="meta-row">
+          <span class="meta-row__label">Teaching</span>
+          <span class="meta-row__val">Sam Houston State University</span>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="section-header">
-            <div class="section-tag">What I Offer</div>
-            <h2>Strategic Consulting Services</h2>
-            <p class="section-description">From AI strategy to product development, I bring deep technical expertise and business acumen to accelerate your innovation journey.</p>
+        <div class="meta-row">
+          <span class="meta-row__label">Location</span>
+          <span class="meta-row__val">Greater Houston, TX</span>
         </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <span class="service-icon">🤖</span>
-                <h3>AI & Automation Strategy</h3>
-                <p>Transform your operations with intelligent automation and agentic AI systems.</p>
-                <ul class="service-list">
-                    <li>AI-powered business transformation</li>
-                    <li>Agentic AI development (Claude Code, multi-agent)</li>
-                    <li>Voice AI implementation (Vapi, conversational AI)</li>
-                    <li>Process automation & workflow optimization</li>
-                    <li>Custom LLM integration & fine-tuning</li>
-                </ul>
-            </div>
+      </div>
+    </div>
 
-            <div class="service-card">
-                <span class="service-icon">🚀</span>
-                <h3>Product Development</h3>
-                <p>Rapid innovation from concept to market with Agile methodologies and design thinking.</p>
-                <ul class="service-list">
-                    <li>Technology innovation consulting</li>
-                    <li>Agile product development</li>
-                    <li>Design thinking workshops</li>
-                    <li>Product-market fit validation</li>
-                    <li>Go-to-market strategy</li>
-                </ul>
-            </div>
+    <div class="cred-cards">
+      <div class="cred reveal">
+        <div class="cred__org">Cornell University</div>
+        <div class="cred__role">MBA — Johnson Graduate School of Management</div>
+        <div class="cred__detail">Strategic leadership, product management, business transformation</div>
+      </div>
+      <div class="cred reveal d1">
+        <div class="cred__org">Purdue University</div>
+        <div class="cred__role">BS, Chemical Engineering</div>
+        <div class="cred__detail">Systems thinking and quantitative problem-solving at the foundation</div>
+      </div>
+      <div class="cred reveal d2">
+        <div class="cred__org">Procter &amp; Gamble</div>
+        <div class="cred__role">Product Innovation Leadership</div>
+        <div class="cred__detail">Consumer goods innovation and product strategy at global scale</div>
+      </div>
+      <div class="cred reveal d2">
+        <div class="cred__org">Intuit</div>
+        <div class="cred__role">Technology &amp; Product Development</div>
+        <div class="cred__detail">Product strategy and execution at a world-class technology company</div>
+      </div>
+      <div class="cred reveal d3">
+        <div class="cred__org">Sam Houston State University</div>
+        <div class="cred__role">Adjunct Faculty — AI, Robotics &amp; Agile Innovation</div>
+        <div class="cred__detail">Building curriculum and teaching the next generation of technology leaders</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <span class="service-icon">⚡</span>
-                <h3>SaaS & Platform Development</h3>
-                <p>Build scalable, multi-tenant platforms with modern technology stacks.</p>
-                <ul class="service-list">
-                    <li>Multi-tenant SaaS architecture</li>
-                    <li>Full-stack development (Next.js, React, Node.js)</li>
-                    <li>API integration & development</li>
-                    <li>Database design (Supabase, Firebase)</li>
-                    <li>Cloud infrastructure & DevOps</li>
-                </ul>
-            </div>
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="contact__inner">
+    <h2 class="contact__h2 reveal">Let's build something <em>remarkable.</em></h2>
+    <p class="contact__sub reveal d1">
+      Whether you're launching a venture, navigating transformation, or need a technical
+      thought partner with real operating experience — I'd like to hear from you.
+    </p>
+    <div class="contact__actions reveal d2">
+      <a href="mailto:hello@vajihkhan.com" class="btn btn-white">Send an email</a>
+      <a href="https://www.linkedin.com/in/vajihkhan/" target="_blank" rel="noopener" class="btn btn-ghost">Connect on LinkedIn</a>
+    </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <span class="service-icon">🏥</span>
-                <h3>Healthcare Technology</h3>
-                <p>Specialized solutions for dental and healthcare practices.</p>
-                <ul class="service-list">
-                    <li>Practice management systems</li>
-                    <li>AI receptionist implementation</li>
-                    <li>Patient engagement automation</li>
-                    <li>HIPAA-compliant systems</li>
-                    <li>EHR integration (Eaglesoft, Dentrix)</li>
-                </ul>
-            </div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <div class="footer__logo">Vajih Khan</div>
+      <p class="footer__tagline">AI strategy, product development, and technology consulting. Greater Houston, TX.</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h6>Navigation</h6>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#ventures">Ventures</a></li>
+          <li><a href="#about">Background</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h6>Connect</h6>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/vajihkhan/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://github.com/vajih" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:hello@vajihkhan.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p class="footer__copy">&copy; 2026 Vajih Khan. All rights reserved.</p>
+  </div>
+</footer>
 
-            <div class="service-card">
-                <span class="service-icon">📚</span>
-                <h3>EdTech & Training</h3>
-                <p>Build educational technology and corporate training programs.</p>
-                <ul class="service-list">
-                    <li>Curriculum development for tech programs</li>
-                    <li>IoT/Robotics education platforms</li>
-                    <li>Corporate training design</li>
-                    <li>Innovation workshops</li>
-                    <li>Academic program consultation</li>
-                </ul>
-            </div>
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 55);
+  }, { passive: true });
 
-            <div class="service-card">
-                <span class="service-icon">💼</span>
-                <h3>Strategic Advisory</h3>
-                <p>Executive guidance for technology roadmaps and digital transformation.</p>
-                <ul class="service-list">
-                    <li>Technology roadmap development</li>
-                    <li>Digital transformation strategy</li>
-                    <li>Innovation portfolio management</li>
-                    <li>Technical due diligence</li>
-                    <li>Pivot & repositioning guidance</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+  // Mobile menu
+  const burger   = document.getElementById('burger');
+  const mob      = document.getElementById('mob');
+  const mobClose = document.getElementById('mob-close');
+  burger.addEventListener('click',   () => mob.classList.add('open'));
+  mobClose.addEventListener('click', () => mob.classList.remove('open'));
+  mob.querySelectorAll('.mob-link').forEach(l =>
+    l.addEventListener('click', () => mob.classList.remove('open'))
+  );
 
-    <!-- Active Projects Section -->
-    <section id="projects" class="projects">
-        <div class="section-header">
-            <div class="section-tag">Active Ventures</div>
-            <h2>Innovation In Action</h2>
-            <p class="section-description">Current ventures demonstrating applied expertise across healthcare technology, AI tools, and community platforms.</p>
-        </div>
-        <div class="project-grid">
-            <div class="project-card">
-                <span class="project-tag">Healthcare SaaS</span>
-                <h3>DentalConnect Pro</h3>
-                <p>Multi-tenant SaaS platform providing AI receptionists and practice management for dental practices. Features Vapi-powered voice AI, Eaglesoft integration, and automated appointment workflows.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Vapi</span>
-                    <span class="tech-tag">Twilio</span>
-                    <span class="tech-tag">Supabase</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Next.js</span>
-                </div>
-            </div>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-            <div class="project-card">
-                <span class="project-tag">AI Tax Tools</span>
-                <h3>TaxClaw / SaveRx.ai</h3>
-                <p>AI-powered tax preparation tools leveraging Claude API for maximum refund optimization. Published to production with CPA verification and comprehensive calculation accuracy.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Claude API</span>
-                    <span class="tech-tag">OpenClaw</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Hostinger VPS</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-tag">Mobile App</span>
-                <h3>Zikr Circles</h3>
-                <h3>Zikr Circles</h3>
-                <p>Mobile-first Next.js/Supabase platform for guided Islamic group remembrance, integrating WhatsApp for community engagement and real-time coordination.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Next.js</span>
-                    <span class="tech-tag">Supabase</span>
-                    <span class="tech-tag">WhatsApp API</span>
-                    <span class="tech-tag">Claude Code</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-tag">Real Estate</span>
-                <h3>HarvestBond</h3>
-                <p>Agricultural real estate investment platform connecting investors with farm opportunities. Managing Sterling Ridge Magnolia LLC property operations.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">PropTech</span>
-                    <span class="tech-tag">Data Analytics</span>
-                    <span class="tech-tag">Investment Management</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-tag">Development Tools</span>
-                <h3>SmartMeter</h3>
-                <p>AI cost optimization tool for OpenClaw featuring live-updating web dashboard for monitoring API usage and spend across multiple AI providers.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">npm Package</span>
-                    <span class="tech-tag">Web Dashboard</span>
-                    <span class="tech-tag">OpenClaw</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <span class="project-tag">Academic</span>
-                <h3>The Agile Innovator</h3>
-                <p>15-principle book integrating Agile and design thinking for both academic textbook use at Sam Houston State and corporate workshop delivery.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Curriculum Design</span>
-                    <span class="tech-tag">Innovation Framework</span>
-                    <span class="tech-tag">Corporate Training</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Credentials Section -->
-    <section id="credentials" class="credentials">
-        <div class="section-header">
-            <div class="section-tag">Background</div>
-            <h2>Credentials & Experience</h2>
-            <p class="section-description">Academic excellence combined with real-world impact across Fortune 500 companies and entrepreneurial ventures.</p>
-        </div>
-        <div class="credentials-grid">
-            <div class="credential-block">
-                <h3>Education</h3>
-                <div class="credential-item">
-                    <div class="credential-title">MBA</div>
-                    <div class="credential-org">Cornell University - Johnson Graduate School of Management</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">BS in Chemical Engineering</div>
-                    <div class="credential-org">Purdue University</div>
-                </div>
-            </div>
-
-            <div class="credential-block">
-                <h3>Current Roles</h3>
-                <div class="credential-item">
-                    <div class="credential-title">Adjunct Faculty Instructor</div>
-                    <div class="credential-org">Sam Houston State University - AI, Robotics & Agile Innovation</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">Founder & CEO</div>
-                    <div class="credential-org">DentalConnect Pro, SaveRx.ai, HarvestBond</div>
-                </div>
-            </div>
-
-            <div class="credential-block">
-                <h3>Key Experience</h3>
-                <div class="credential-item">
-                    <div class="credential-title">Product Innovation</div>
-                    <div class="credential-org">Procter & Gamble - Consumer Goods Innovation</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">Technology Leadership</div>
-                    <div class="credential-org">Intuit - Product Development & Strategy</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">Energy Sector</div>
-                    <div class="credential-org">Global Markets & Technology Implementation</div>
-                </div>
-            </div>
-
-            <div class="credential-block">
-                <h3>Technical Expertise</h3>
-                <div class="credential-item">
-                    <div class="credential-title">AI & LLMs</div>
-                    <div class="credential-org">Claude API, GPT, Agentic Systems, Voice AI (Vapi)</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">Full-Stack Development</div>
-                    <div class="credential-org">Next.js, React, Node.js, Supabase, Firebase</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">Cloud & DevOps</div>
-                    <div class="credential-org">Docker, Hostinger VPS, Vercel, CI/CD</div>
-                </div>
-                <div class="credential-item">
-                    <div class="credential-title">IoT & Robotics</div>
-                    <div class="credential-org">ESP32, Raspberry Pi, Home Assistant, FANUC</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="cta-section">
-        <div class="cta-content">
-            <h2>Let's Build Something Remarkable</h2>
-            <p>Whether you're launching a new venture, transforming existing operations, or navigating complex technical challenges—I bring the experience, expertise, and execution to move fast and deliver results.</p>
-            <div class="cta-group">
-                <a href="mailto:vajih@example.com" class="btn btn-primary">Schedule Consultation</a>
-                <a href="https://www.linkedin.com/in/vajihkhan/" target="_blank" class="btn btn-secondary">Connect on LinkedIn</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <h4>Vajih Khan</h4>
-                <p>Innovation & Technology Consulting based in Greater Houston. Helping organizations navigate digital transformation with AI, Agile methodologies, and strategic product development.</p>
-            </div>
-            <div class="footer-links">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#projects">Active Projects</a></li>
-                    <li><a href="#credentials">Credentials</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h5>Connect</h5>
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/vajihkhan/" target="_blank">LinkedIn</a></li>
-                    <li><a href="https://github.com/vajih" target="_blank">GitHub</a></li>
-                    <li><a href="https://twitter.com/vajih" target="_blank">Twitter/X</a></li>
-                    <li><a href="mailto:vajih@example.com">Email</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Vajih Khan Consulting. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll-based animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .project-card, .credential-block').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
 </body>
 </html>
